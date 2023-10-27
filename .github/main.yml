@@ -1,0 +1,32 @@
+---
+name: CI
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  test:
+    name: test
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: alpine/curl:8.4.0
+    services:
+        keycloak:
+            image: quay.io/keycloak/keycloak:22.0.5
+            env: 
+              KEYCLOAK_ADMIN: admin
+              KEYCLOAK_ADMIN_PASSWORD: testing1   
+              KC_HOSTNAME: keycloak  
+              KC_HTTP_ENABLED: true
+            ports:
+              - 8080:8080
+            options: --entrypoint start-dev
+    steps:
+      - name: Curl Keycloak
+        run: |
+          curl -vLI http://keycloak:8080/
