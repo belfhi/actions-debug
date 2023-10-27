@@ -24,7 +24,7 @@ jobs:
               KC_HTTP_ENABLED: true
             ports:
               - 8080:8080
-            options: --entrypoint=/opt/keycloak/bin/kc.sh start-dev
+            options: " --entrypoint=/opt/keycloak/bin/kc.sh start-dev"
     steps:
       - name: Curl Keycloak
         run: |
