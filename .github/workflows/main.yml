@@ -27,4 +27,4 @@ jobs:
     steps:
       - name: Curl Keycloak
         run: |
-          curl -vLI http://keycloak:8080/
+          sleep 30 && curl -vLI http://keycloak:8080/
