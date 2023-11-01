@@ -16,7 +16,7 @@ jobs:
       image: alpine/curl:8.4.0
     services:
         keycloak:
-            image: quay.io/keycloak/keycloak:22.0.5
+            image: dvrbanec/keycloak-dev:latest
             env: 
               KEYCLOAK_ADMIN: admin
               KEYCLOAK_ADMIN_PASSWORD: testing1   
@@ -24,7 +24,6 @@ jobs:
               KC_HTTP_ENABLED: true
             ports:
               - 8080:8080
-            options: " --entrypoint=/opt/keycloak/bin/kc.sh start-dev"
     steps:
       - name: Curl Keycloak
         run: |
